@@ -2,7 +2,11 @@
 
 ## `class Octofet`
 
+Uses: class Spi2Parallel
+
 Create an object of type `Octofet` to communicate with a particular [Octofet board](https://my.amperka.com/modules/octofet).
+
+The one board Octofet includes of 8 power switchers. Take the names of the synonyms: `pin` is a one power switch and `port` is one a device board Octofet.
 
 ### `Octofet(uint8_t pinCS, uint8_t devicesCount = 1)`
 
@@ -24,24 +28,35 @@ Difference between Hardware and Software SPI is speed–with software SPI it wil
 
 ### `void begin(uint8_t* resetValues = NULL)`
 
-Initializes the given interface, prepares the board for communication. The argument `resetValues` states power switchers of all devices by default as 8-bit value. One bit for one power switch: 1 is turn-on and 0 is turn-off. If `resetValues` argument is adjusted, then when calling methods `begin()` or `reset()`, power switchers sets value by `resetValues`. If `resetValues` argument is omitted — power switchers sets is turn-off.
+Initializes the given interface, prepares the board for communication. The argument `resetValues` states power switchers of all devices by default as 8-bit value. One bit for one power switch: 1 is turn-on and 0 is turn-off. If `resetValues` argument is adjusted, then when calling method `reset()`, power switchers sets value by `resetValues`. If `resetValues` argument is omitted — power switchers sets is turn-off.
 
 Important, call this method at least once, in your `setup()`.
 
-### `void digitalWrite(uint8_t pin, bool value, uint8_t device = 1)`
+### `void digitalPinWrite(uint8_t pin, bool value, uint8_t device = 0)`
 
 Sets state (turn-on or turn-off) for one power switch. Function arguments:
 
-- `pin`: ordinal number power switch on device. Range is from `0` to `7`. Use option value is `ALL` to selected and sets state of all power switchers.
+- `pin`: ordinal number power switch on device. Range is from `0` to `7`.
 - `value`: states selected power switch. Values (turn-on or turn-off) may be switch is different data types: `HIGH` or `LOW` / `true` or `false` / `1` or `0`.
-- `device`: ordinal number of device on the bus. Range is from `1` to `n`, where `n` last number device. Use option value is `ALL` to selected and sets state of all devices. If the `device` argument is omitted, it used only one board Octofet.
+- `device`: ordinal number of device on the bus. Range is from `0` to `n - 1`, where `n` last number device. If the `device` argument is omitted, it used only one board Octofet.
 
-### `void deviceWrite(uint8_t value, uint8_t device = 1)`
+### `void digitalPortWrite(uint8_t value, uint8_t device = 0)`
 
-Sets state for all power switches. Function arguments:
+Sets state (turn-on or turn-off) for all power switches. Function arguments:
 
 - `value`: 8-bit value for all of 8 power switchers. One bit for one power switch: 1 is turn-on and 0 is turn-off. Use option value is `ALL` to selected and sets state of all power switchers.
-- `device`: ordinal number of device on the bus. Range is from `1` to `n`, where `n` last number device. Use option value is `ALL` to selected and sets state of all devices. If the `device` argument is omitted, it used only one board Octofet.
+- `device`: ordinal number of device on the bus. Range is from `0` to `n - 1`, where `n` last number device. Use option value is `ALL` to selected and sets state of all devices. If the `device` argument is omitted, it used only one board Octofet.
+
+### `bool digitalPinRead(uint8_t pin, uint8_t device = 0)`
+
+Reads state (turn-on or turn-off) for one power switch of the device. Returns `true` or `false`. Function arguments:
+
+- `pin`: ordinal number power switch on device. Range is from `0` to `7`.
+- `device`: ordinal number of device on the bus. Range is from `0` to `n - 1`, where `n` last number device. If the `device` argument is omitted, it used only one board Octofet.
+
+### `uint8_t digitalPortRead(uint8_t device = 0)`
+
+Reads state (turn-on or turn-off) for all power switches of the device. Returns 8-bit value for all of 8 power switchers. One bit for one power switch: 1 is turn-on and 0 is turn-off. Function argument `device`: ordinal number of device on the bus. Range is from `0` to `n - 1`, where `n` last number device. If the `device` argument is omitted, it used only one board Octofet.
 
 ### `void reset()`
 
