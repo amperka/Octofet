@@ -34,7 +34,7 @@ Important, call this method at least once, in your `setup()`.
 
 ### `void digitalPinWrite(uint8_t pin, bool value, uint8_t device = 0)`
 
-Sets state (turn-on or turn-off) for one power switch. Function arguments:
+Sets the state ("on" or "off") of one power switch. Function arguments:
 
 - `pin`: ordinal number power switch on device. Range is from `0` to `7`. Use option value is `ALL` to selected and sets state of all power switches.
 - `value`: states selected power switch. Values (turn-on or turn-off) may be switch is different data types: `HIGH` or `LOW` / `true` or `false` / `1` or `0`.
