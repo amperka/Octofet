@@ -45,13 +45,13 @@ Sets state (turn-on or turn-off) for all power switches. Function arguments:
 - `value`: 8-bit value for all of 8 power switches. One bit for one power switch: 1 is turn-on and 0 is turn-off.
 - `device`: ordinal number of device on the bus. Range is from `0` to `n - 1`, where `n` is last number device. Use option value is `ALL` to selected and sets state of all devices. If the `device` argument is omitted, it used only one board Octofet.
 
-### `bool getSwitchState(uint8_t channel, uint8_t device = 0)`
+### `bool getChannelState(uint8_t channel, uint8_t device = 0)`
 
 Reads state (turn-on or turn-off) for one power switch of the device. Returns `true` or `false`. Function arguments:
 
 - `channel`: ordinal number power switch on device. Range is from `0` to `7`.
 - `device`: ordinal number of device on the bus. Range is from `0` to `n - 1`, where `n` is last number device. If the `device` argument is omitted, it used only one board Octofet.
 
-### `uint8_t getSwitchState8(uint8_t device = 0)`
+### `uint8_t getChannelState8(uint8_t device = 0)`
 
 Reads state (turn-on or turn-off) for all power switches of the device. Returns 8-bit value for all of 8 power switches. One bit for one power switch: 1 is turn-on and 0 is turn-off. Function argument `device`: ordinal number of device on the bus. Range is from `0` to `n - 1`, where `n` is last number device. If the `device` argument is omitted, it used only one board Octofet.
