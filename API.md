@@ -38,9 +38,9 @@ Sets the state ("on" or "off") of one power switch.
 
 ### `void digitalWrite8(uint8_t value, uint8_t device = 0)`
 
-Sets state (turn-on or turn-off) for all power switches at once.
+Sets the state ("on" or "off") of all power switches at once.
 
-- `value`: 8-bit value for all of 8 power switches. One bit for one channel: 1 is turn-on and 0 is turn-off. For example: `0b10101010`.
+- `value`: 8-bit value for all of 8 power switches. One bit for one channel: 1 is "on" and 0 is "off". For example: `0b10101010`.
 - `device`: the index of the affected Octofet in the daisy-chain. Ranges from `0` to `n - 1`, where `n` is the number of Octofets in the chain. If omitted, targets Octofet nearest to the controller.
 
 ### `bool getChannelState(uint8_t channel, uint8_t device = 0)`
@@ -52,4 +52,4 @@ Returns the last (i.e., current) set state for one power switch of the device. R
 
 ### `uint8_t getChannelState8(uint8_t device = 0)`
 
-Returns 8-bit value of the last (i.e., current) set state for all 8 power switches of the device at once. One bit for one channel: 1 is turn-on and 0 is turn-off. For example: `0b10101010`. The argument `device` is the index of the affected Octofet in the daisy-chain. Ranges from `0` to `n - 1`, where `n` is the number of Octofets in the chain. If omitted, targets Octofet nearest to the controller.
+Returns 8-bit value of the last (i.e., current) set state for all 8 power switches of the device at once. One bit for one channel: 1 is "on" and 0 is "off". For example: `0b10101010`. The argument `device` is the index of the affected Octofet in the daisy-chain. Ranges from `0` to `n - 1`, where `n` is the number of Octofets in the chain. If omitted, targets Octofet nearest to the controller.
