@@ -1,4 +1,4 @@
-#include "octofet.h"
+#include "Octofet.h"
 
 Octofet::Octofet(uint8_t pinCS, uint8_t deviceCount)
     : _spi(pinCS, deviceCount)
