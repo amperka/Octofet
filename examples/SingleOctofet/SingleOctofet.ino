@@ -1,9 +1,10 @@
 // Two libraries have to be included
-// to work with the module. Download on
+// to work with the module. Download at
 // https://amperka.com/my/octofet
 #include <Octofet.h>
 #include <SPI.h>
 
+// any GPIO pin can be used as pinCS
 constexpr auto pinCS = 10;
 
 // Create an object of Octofet type
@@ -12,8 +13,10 @@ Octofet octofet(pinCS);
 
 // If software SPI needed
 // add MOSI and SCK pins numbers, like this:
+
 // constexpr auto pinMOSI = 7;
 // constexpr auto pinSCK = 5;
+// any GPIO pins can be used as pinMOSI and pinSCK
 // Octofet octofet(pinCS, pinMOSI , pinSCK);
 
 void setup() {

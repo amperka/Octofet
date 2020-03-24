@@ -1,10 +1,12 @@
 // Two libraries have to be included
-// to work with the module. Download on
+// to work with the module. Download at
 // https://amperka.com/my/octofet
 #include <Octofet.h>
 #include <SPI.h>
 
+// any GPIO pin can be used as pinCS
 constexpr auto pinCS = 10;
+// the number of Octofet boards connected in a daisy-chain
 constexpr auto deviceCount = 3;
 
 // Create an object of Octofet type
@@ -15,6 +17,7 @@ Octofet octofet(pinCS, deviceCount);
 // add MOSI and SCK pins numbers, like this:
 // constexpr auto pinMOSI = 7;
 // constexpr auto pinSCK = 5;
+// any GPIO pins can be used as pinMOSI and pinSCK
 // Octofet octofet(pinCS, pinMOSI , pinSCK, deviceCount);
 
 void setup() {
@@ -23,7 +26,7 @@ void setup() {
 }
 
 void loop() {
-    // Set the "on" state for every switches of every device one by one
+    // Set the "on" state for each switch of each device one by one
     for (int t = 0; t < deviceCount; t++) {
         for (int i = 0; i < 8; i++) {
             octofet.digitalWrite(i, HIGH, t);
