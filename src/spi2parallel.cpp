@@ -1,26 +1,26 @@
 #include "spi2parallel.h"
 
-Spi2Parallel::Spi2Parallel(uint8_t pinCS, uint8_t devicesCount, uint8_t bitOrder) {
-    _pinCS = pinCS;
-    _devicesCount = devicesCount;
-    _bitOrder = bitOrder;
-    _devicesChain = new uint8_t[_devicesCount - 1];
+Spi2Parallel::Spi2Parallel(uint8_t pinCS, uint8_t deviceCount, uint8_t bitOrder)
+    : _pinCS(pinCS)
+    , _deviceCount(deviceCount)
+    , _bitOrder(bitOrder) {
+    _deviceChain = new uint8_t[_deviceCount - 1];
     _hardwareSPI = true;
 }
 
-Spi2Parallel::Spi2Parallel(uint8_t pinCS, uint8_t pinMOSI, uint8_t pinSCK, uint8_t devicesCount, uint8_t bitOrder) {
-    _pinCS = pinCS;
-    _pinMOSI = pinMOSI;
-    _pinSCK = pinSCK;
-    _devicesCount = devicesCount;
-    _bitOrder = bitOrder;
-    _devicesChain = new uint8_t[_devicesCount - 1];
+Spi2Parallel::Spi2Parallel(uint8_t pinCS, uint8_t pinMOSI, uint8_t pinSCK, uint8_t deviceCount, uint8_t bitOrder)
+    : _pinCS(pinCS)
+    , _pinMOSI(pinMOSI)
+    , _pinSCK(pinSCK)
+    , _deviceCount(deviceCount)
+    , _bitOrder(bitOrder) {
+    _deviceChain = new uint8_t[_deviceCount - 1];
     _hardwareSPI = false;
 }
 
 Spi2Parallel::~Spi2Parallel() {
-    if (_devicesChain != NULL) {
-        delete[] _devicesChain;
+    if (_deviceChain != nullptr) {
+        delete[] _deviceChain;
     }
 }
 
@@ -41,21 +41,21 @@ void Spi2Parallel::begin() {
 
 void Spi2Parallel::writeBit(uint8_t bit, bool value, uint8_t device) {
     if (value)
-        _devicesChain[device] |= (1 << bit);
+        _deviceChain[device] |= (1 << bit);
     else
-        _devicesChain[device] &= ~(1 << bit);
+        _deviceChain[device] &= ~(1 << bit);
 }
 
 void Spi2Parallel::writeByte(uint8_t value, uint8_t device) {
-    _devicesChain[device] = value;
+    _deviceChain[device] = value;
 }
 
-bool Spi2Parallel::readBit(uint8_t bit, uint8_t device) {
-    return (_devicesChain[device] >> bit) & 1;
+bool Spi2Parallel::readBit(uint8_t bit, uint8_t device) const {
+    return (_deviceChain[device] >> bit) & 1;
 }
 
-uint8_t Spi2Parallel::readByte(uint8_t device) {
-    return _devicesChain[device];
+uint8_t Spi2Parallel::readByte(uint8_t device) const {
+    return _deviceChain[device];
 }
 
 void Spi2Parallel::update() {
@@ -66,11 +66,11 @@ void Spi2Parallel::update() {
     }
     digitalWrite(_pinCS, LOW);
     // bit stream output
-    for (int8_t i = _devicesCount - 1; i >= 0; i--) {
+    for (int8_t i = _deviceCount - 1; i >= 0; i--) {
         if (_hardwareSPI)
-            SPI.transfer(_devicesChain[i]);
+            SPI.transfer(_deviceChain[i]);
         else
-            shiftOut(_pinMOSI, _pinSCK, _bitOrder, _devicesChain[i]);
+            shiftOut(_pinMOSI, _pinSCK, _bitOrder, _deviceChain[i]);
     }
     // end condition
     digitalWrite(_pinCS, HIGH);

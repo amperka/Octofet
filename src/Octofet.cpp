@@ -1,13 +1,13 @@
 #include "octofet.h"
 
 Octofet::Octofet(uint8_t pinCS, uint8_t deviceCount)
-    : _spi(pinCS, deviceCount) {
-    _deviceCount = deviceCount;
+    : _spi(pinCS, deviceCount)
+    , _deviceCount(deviceCount) {
 }
 
 Octofet::Octofet(uint8_t pinCS, uint8_t pinMOSI, uint8_t pinSCK, uint8_t deviceCount)
-    : _spi(pinCS, pinMOSI, pinSCK, deviceCount) {
-    _deviceCount = deviceCount;
+    : _spi(pinCS, pinMOSI, pinSCK, deviceCount)
+    , _deviceCount(deviceCount) {
 }
 
 void Octofet::begin() {
@@ -27,10 +27,10 @@ void Octofet::digitalWrite8(uint8_t value, uint8_t device) {
     _spi.update();
 }
 
-bool Octofet::getChannelState(uint8_t channel, uint8_t device) {
+bool Octofet::getChannelState(uint8_t channel, uint8_t device) const {
     return _spi.readBit(channel, device);
 }
 
-uint8_t Octofet::getChannelState8(uint8_t device) {
+uint8_t Octofet::getChannelState8(uint8_t device) const {
     return _spi.readByte(device);
 }

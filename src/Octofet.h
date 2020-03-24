@@ -12,8 +12,8 @@ public:
     void begin();
     void digitalWrite(uint8_t channel, bool value, uint8_t device = 0);
     void digitalWrite8(uint8_t value, uint8_t device = 0);
-    bool getChannelState(uint8_t channel, uint8_t device = 0);
-    uint8_t getChannelState8(uint8_t device = 0);
+    bool getChannelState(uint8_t channel, uint8_t device = 0) const;
+    uint8_t getChannelState8(uint8_t device = 0) const;
 
 private:
     Spi2Parallel _spi;
