@@ -18,7 +18,7 @@ Octofet octofet(pinCS, deviceCount);
 // constexpr auto pinMOSI = 7;
 // constexpr auto pinSCK = 5;
 // any GPIO pins can be used as pinMOSI and pinSCK
-// Octofet octofet(pinCS, pinMOSI , pinSCK, deviceCount);
+// Octofet octofet(pinCS, pinMOSI, pinSCK, deviceCount);
 
 void setup() {
     // Start the board for communication
