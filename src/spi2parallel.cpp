@@ -4,7 +4,7 @@ Spi2Parallel::Spi2Parallel(uint8_t pinCS, uint8_t deviceCount, uint8_t bitOrder)
     : _pinCS(pinCS)
     , _deviceCount(deviceCount)
     , _bitOrder(bitOrder)
-    , _deviceChain(new uint8_t[_deviceCount - 1])
+    , _deviceChain(new uint8_t[_deviceCount])
     , _hardwareSPI(true) {
 }
 
@@ -14,7 +14,7 @@ Spi2Parallel::Spi2Parallel(uint8_t pinCS, uint8_t pinMOSI, uint8_t pinSCK, uint8
     , _pinSCK(pinSCK)
     , _deviceCount(deviceCount)
     , _bitOrder(bitOrder)
-    , _deviceChain(new uint8_t[_deviceCount - 1])
+    , _deviceChain(new uint8_t[_deviceCount])
     , _hardwareSPI(false) {
 }
 
